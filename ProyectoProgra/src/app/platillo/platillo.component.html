@@ -1,0 +1,116 @@
+<app-logout></app-logout>
+<div class="container">
+    <h1 class="text-center mt-4">Crear nuevo platillo</h1>
+    <hr>
+    <form (ngSubmit)="crearPlatillo()" id="platilloForm">
+        <!-- Información del platillo -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <label for="descripcion" class="form-label">Nombre *</label>
+                <input type="text" id="descripcion" [(ngModel)]="platillo.descripcion" name="descripcion" required class="form-control" placeholder="Nombre del platillo">
+            </div>
+            <div class="col-md-6">
+                <label for="precioVenta" class="form-label">Precio *</label>
+                <input type="number" id="precioVenta" [(ngModel)]="platillo.precioVenta" name="precioVenta" required class="form-control" placeholder="Precio del platillo">
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="mb-3">
+                <label for="foto" class="form-label">URL de la Foto: *</label>
+                <input type="text" id="foto" class="form-control form-control-lg" 
+                       [ngModelOptions]="{standalone:true}" [(ngModel)]="platillo.foto" 
+                       [readonly]="platillo.foto">
+              </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="fotoUpload" class="form-label fw-bold">Subir Imagen:</label>
+            <input type="file" id="fotoUpload" class="form-control" (change)="onFileChange($event)">
+          </div>
+
+        <hr>
+
+        <!-- Ingredientes -->
+        <div *ngFor="let c of platillo.plain; let i = index" class="row mb-3">
+            <div class="col-md-6">
+                <label for="ingredientes" class="form-label">Seleccionar Ingredientes *</label>
+                <select class="form-select" [(ngModel)]="c.ingredienteIdingrediente" name="ingredienteIdingrediente_{{i}}" required>
+                    <option *ngFor="let t of ingredientes" [value]="t.idingrediente">{{t.nombre}}</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Cantidad *</label>
+                <input type="number" [(ngModel)]="c.cantidadIngrediente" name="cantidadIngrediente_{{i}}" required class="form-control" placeholder="Cantidad del ingrediente">
+            </div>
+        </div>        
+        
+        <!-- Botón para agregar más ingredientes -->
+        <div class="d-flex justify-content-center mb-4">
+            <button type="button" class="btn btn-warning" (click)="agregarIngrediente()">Agregar Ingrediente</button>
+        </div>
+
+        <hr>
+
+        <!-- Botón para enviar el formulario -->
+        <div class="text-center">
+            <input class="btn btn-primary w-100" type="submit" value="Guardar Platillo">
+        </div>
+    </form>
+    
+    <hr>
+
+    <!-- Lista de platillos -->
+    <div class="container mt-4">
+        <h2 class="text-center mb-4">Lista de platillos</h2>
+        
+        <!-- Tabla estilizada -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped align-middle">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th>ID</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Foto</th>
+                        <th>Ingredientes</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let platillo of platillos">
+                        <td class="text-center">{{platillo.idplatillo}}</td>
+                        <td>{{platillo.descripcion}}</td>
+                        <td class="text-center">{{platillo.precioVenta | currency}}</td>
+                        <td>
+                            <img *ngIf="platillo.foto" [src]="platillo.foto" alt="Foto de {{platillo.foto}}" style="width: 100px; height: auto;">
+                        </td>
+                        <td>
+                            <ul class="list-unstyled">
+                                <li *ngFor="let ingrediente of platillo.plain">
+                                    <strong>{{ obtenerNombreIngrediente(ingrediente.ingredienteIdingrediente) }}:</strong> {{ingrediente.cantidadIngrediente}}
+                                </li>
+                            </ul>
+                        </td>
+                        <td class="text-center">
+                            <mat-divider></mat-divider>
+                            <section>
+                                <div class="example-button-row">
+                                    <div class="example-flex-container">
+                                        <div class="example-button-container">
+                                            <button mat-fab aria-label="Eliminar platillo" (click)="eliminarPlatillo(platillo.idplatillo)">
+                                                <mat-icon>delete</mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">
+      Noticias
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="light" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Noticias</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list lines="none">
+    <ion-card *ngFor="let noticia of noticias" class="noticia-card">
+      <img [src]="noticia.foto" alt="Imagen de la noticia" class="noticia-img" />
+      <ion-card-header>
+        <ion-card-title class="noticia-titulo">{{ noticia.titulo }}</ion-card-title>
+        <ion-card-subtitle class="noticia-fecha">{{ noticia.fecha | date: 'dd-MM-yyyy' }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p class="noticia-descripcion">{{ noticia.descripcion }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

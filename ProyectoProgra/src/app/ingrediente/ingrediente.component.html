@@ -1,0 +1,63 @@
+<app-logout></app-logout>
+<div class="container mt-4">
+  <!-- Formulario de creación de ingredientes -->
+  <h2 class="text-center mb-4">Crear nuevo Ingrediente</h2>
+  <form (ngSubmit)="guardarIngrediente()" id="ingredienteForm" class="p-4 shadow-sm rounded bg-light">
+      <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre *</label>
+          <input type="text" id="nombre" [ngModelOptions]="{standalone:true}" 
+              [(ngModel)]="nuevoIngrediente.nombre" required class="form-control" placeholder="Nombre del ingrediente">
+      </div>
+      <div class="mb-3">
+          <label for="cantidad" class="form-label">Cantidad *</label>
+          <input type="text" id="cantidad" [ngModelOptions]="{standalone:true}" 
+              [(ngModel)]="nuevoIngrediente.cantidadStock" required class="form-control" placeholder="Cantidad en stock">
+      </div>
+      
+      <div class="text-center">
+          <button type="submit" class="btn btn-success btn-lg">
+              <i class="fas fa-save"></i> Guardar
+          </button>
+      </div>
+  </form>
+
+  <!-- Lista de ingredientes -->
+  <h3 class="mt-5 text-center">Lista de Ingredientes</h3>
+  <div class="table-responsive mt-3">
+      <table class="table table-bordered table-hover table-striped align-middle shadow-sm">
+          <thead class="table-dark text-center">
+              <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Cantidad</th>
+                  <th scope="col">Acciones</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let ingrediente of ingredientes">
+                  <td class="text-center">{{ ingrediente.idingrediente }}</td>
+                  <td>{{ ingrediente.nombre }}</td>
+                  <td>{{ ingrediente.cantidadStock }}</td>
+                  <td class="text-center">
+                    <mat-divider></mat-divider>
+                    <section>
+                        <div class="example-button-row">
+                            <div class="example-flex-container">
+                                <div class="example-button-container">
+                                    <button mat-fab aria-label="Eliminar ingrediente" (click)="eliminarIngredientes(ingrediente.idingrediente)">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </td>
+                
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</div>
+
+    
+    

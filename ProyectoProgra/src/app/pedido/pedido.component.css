@@ -1,0 +1,39 @@
+.pedidos-table {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .pedidos-table thead {
+    background-color: #343a40; /* Gris oscuro */
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .pedidos-table th, .pedidos-table td {
+    padding: 12px 15px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  .pedidos-table tbody tr:nth-child(even) {
+    background-color: #f3f3f3; /* Gris claro para filas alternas */
+  }
+  
+  .pedidos-table .detalle-lista {
+    padding-left: 0;
+    list-style: none;
+  }
+  
+  .pedidos-table .detalle-lista li {
+    font-size: 0.9em;
+    color: #555;
+    padding: 3px 0;
+  }
+  
+  .btn-danger {
+    border-radius: 5px;
+    font-size: 0.9em;
+  }
+  

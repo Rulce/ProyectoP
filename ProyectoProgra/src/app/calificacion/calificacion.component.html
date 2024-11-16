@@ -1,0 +1,57 @@
+<app-logout></app-logout>
+<div class="container mt-5">
+    <!-- Título de Calificación -->
+    <h1 class="text-center display-4 mb-4">Gestión de Calificaciones</h1>
+    <hr>
+  
+    <!-- Formulario de calificaciones -->
+    <div class="card p-4 shadow-lg mb-5 bg-light">
+      <h2 class="text-center mb-4">Nueva Calificación</h2>
+      <form (ngSubmit)="guardarCali()" id="calificacionForm">
+        <div class="mb-3">
+          <label for="nota" class="form-label">Nota: *</label>
+          <input type="text" id="nota" class="form-control form-control-lg" 
+                 [ngModelOptions]="{standalone:true}" [(ngModel)]="nuevaCalificacion.nota" required>
+        </div>
+        
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre: *</label>
+          <input type="text" id="nombre" class="form-control form-control-lg" 
+                 [ngModelOptions]="{standalone:true}" [(ngModel)]="nuevaCalificacion.nombre" required>
+        </div>
+        
+        <div class="mb-3">
+          <label for="noExamen" class="form-label">No. Examen: *</label>
+          <input type="text" id="noExamen" class="form-control form-control-lg" 
+                 [ngModelOptions]="{standalone:true}" [(ngModel)]="nuevaCalificacion.noExamen" required>
+        </div>
+  
+        <button type="submit" class="btn btn-success btn-lg w-100">Guardar Calificación</button>
+      </form>
+    </div>
+  
+    <!-- Tabla de calificaciones -->
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-hover align-middle">
+        <thead class="bg-dark text-white text-center">
+          <tr>
+            <th>ID</th>
+            <th>Nota</th>
+            <th>Nombre</th>
+            <th>No. Examen</th>
+            <th>Fecha Calificación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let calificacion of calificaciones">
+            <td class="text-center fw-bold">{{ calificacion.idCalificacion }}</td>
+            <td>{{ calificacion.nota }}</td>
+            <td>{{ calificacion.nombre }}</td>
+            <td>{{ calificacion.noExamen }}</td>
+            <td>{{ calificacion.fechaCalificacion | date:'dd-MM-yyyy HH:mm:ss' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

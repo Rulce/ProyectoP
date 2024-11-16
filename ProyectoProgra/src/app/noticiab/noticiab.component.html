@@ -1,0 +1,61 @@
+<app-logout></app-logout>
+<div class="container mt-5">
+  <h1 class="text-center display-4 mb-4">Gestión de Noticias</h1>
+  <hr>
+
+  <!-- Formulario de noticias -->
+  <div class="card p-4 shadow-lg mb-5 bg-light">
+    <h2 class="text-center mb-4">Nueva Noticia</h2>
+    <form (ngSubmit)="guardarNoticia()" id="noticiaForm">
+      <div class="mb-3">
+        <label for="titulo" class="form-label">Título: *</label>
+        <input type="text" id="titulo" class="form-control form-control-lg"
+               [ngModelOptions]="{standalone:true}" [(ngModel)]="nuevaNoticia.titulo" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción: *</label>
+        <textarea id="descripcion" rows="3" class="form-control form-control-lg"
+                  [ngModelOptions]="{standalone:true}" [(ngModel)]="nuevaNoticia.descripcion" required></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="foto" class="form-label">URL de la Foto: *</label>
+        <input type="text" id="foto" class="form-control form-control-lg"
+               [ngModelOptions]="{standalone:true}" [(ngModel)]="nuevaNoticia.foto"
+               [readonly]="nuevaNoticia.foto">
+      </div>
+
+      <div class="mb-3">
+        <label for="fotoUpload" class="form-label fw-bold">Subir Imagen:</label>
+        <input type="file" id="fotoUpload" class="form-control" (change)="onFileChange($event)">
+      </div>
+
+      <button *ngIf="nuevaNoticia.idnoticia" type="button" class="btn btn-primary btn-lg w-100" (click)="actualizarNoticia()">
+        Actualizar Noticia
+      </button>
+      <button *ngIf="!nuevaNoticia.idnoticia" type="submit" class="btn btn-success btn-lg w-100">
+        Guardar Noticia
+      </button>
+    </form>
+  </div>
+
+  <!-- Tarjetas de noticias -->
+  <div class="d-flex flex-wrap justify-content-center">
+    <mat-card *ngFor="let noticia of noticias" class="m-3 example-card text-white" appearance="outlined" style="width: 300px; background-color: #2c3e50;">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{ noticia.titulo }}</mat-card-title>
+        <mat-card-subtitle>Publicado: {{ noticia.fechaPublicacion | date:'dd-MM-yyyy HH:mm:ss' }}</mat-card-subtitle>
+      </mat-card-header>
+      <img *ngIf="noticia.foto" mat-card-image [src]="noticia.foto" alt="Foto de {{ noticia.titulo }}">
+      <mat-card-content>
+        <p>{{ noticia.descripcion }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="accent" (click)="editarNoticia(noticia)">EDITAR</button>
+        <button mat-button color="warn" (click)="eliminarNoticias(noticia.idnoticia)">ELIMINAR</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

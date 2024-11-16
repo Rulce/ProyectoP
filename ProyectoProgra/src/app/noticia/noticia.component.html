@@ -1,0 +1,17 @@
+<h1>Noticias</h1>
+<body>
+    <table>
+        <tr>
+            <th>Titulo</th>
+            <th>Descripcion</th>
+            <th>Foto</th>
+            <th>Fecha</th>
+        </tr>
+        <tr *ngFor="let noticia of noticias">
+        <td>{{noticia.titulo}}</td>
+        <td>{{noticia.descripcion}}</td>
+        <td>{{noticia.foto}}</td>
+        <td>{{noticia.fechaPublicacion | date:'dd-MM-yyyy'}}</td>
+        </tr>
+    </table>
+</body>

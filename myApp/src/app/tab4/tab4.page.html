@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Ordenes
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card *ngFor="let pedido of pedidos">
+    <ion-card-header>
+      <ion-card-title>Numero de Orden: {{pedido.idpedido}}</ion-card-title>
+      <ion-card-subtitle>Total: {{ pedido.precioTotal }}</ion-card-subtitle>
+      <ion-card-subtitle>Estado: {{ pedido.estadoIdestado | estado: estado }}</ion-card-subtitle>
+      <ion-card-subtitle>Fecha: {{ pedido.fechaHora | date:'short' }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let detalle of pedido.detallePedido">
+          <ion-label>
+            <p>Cantidad: {{ detalle.cantidad }}</p>
+            <p>Precio: {{ detalle.precioUnitario }}</p>
+            <p>platillo: {{ detalle.platilloIdplatillo | platillo:platillos}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

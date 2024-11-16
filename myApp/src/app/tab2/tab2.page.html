@@ -1,0 +1,51 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">
+      Mi perfil
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="light">
+  <ion-list lines="none" class="perfil-lista">
+    <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input placeholder="email@email.com" [(ngModel)]="usuario.correo" [disabled]="true"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Password</ion-label>
+      <ion-input type="password" placeholder="••••••" [(ngModel)]="usuario.password">
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Nombre</ion-label>
+      <ion-input placeholder="Nombre" [(ngModel)]="usuario.nombre"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Apellido</ion-label>
+      <ion-input placeholder="Apellido" [(ngModel)]="usuario.apellido"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">NIT</ion-label>
+      <ion-input placeholder="NIT" [(ngModel)]="usuario.nit"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-grid class="ion-padding">
+    <ion-row class="ion-justify-content-center">
+      <ion-button expand="block" color="tertiary" (click)="cambiarcontrasenia()">
+        Cambiar datos
+      </ion-button>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-margin-top">
+      <ion-button expand="block" color="danger" (click)="logOut()">
+        Cerrar sesión
+      </ion-button>
+    </ion-row>
+  </ion-grid>
+</ion-content>

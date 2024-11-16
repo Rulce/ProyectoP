@@ -1,0 +1,60 @@
+<div class="container my-4">
+  <app-logout></app-logout>
+  <h2 class="text-center mb-4">Consulta de Pedidos</h2>
+
+  <div class="table-responsive d-flex justify-content-center">
+    <table class="table table-striped table-bordered w-100 pedidos-table">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Usuario</th>
+          <th>Fecha</th>
+          <th>Total</th>
+          <th>Estado</th>
+          <th>Detalle</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pedido of pedidos">
+          <td>{{ pedido.idpedido }}</td>
+          <td>{{ pedido.usuarioIdusuario | usuario:usuario }}</td>
+          <td>{{ pedido.fechaHora | date: 'dd-MM-yyyy HH:mm' }}</td>
+          <td>{{ pedido.precioTotal | currency }}</td>
+
+          <!-- Celda de Estado con menú desplegable -->
+          <td>
+            <div class="btn-group">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ pedido.estadoIdestado | estado:estado }}
+              </button>
+              <ul class="dropdown-menu">
+                <li *ngFor="let e of estado">
+                  <a class="dropdown-item" (click)="actualizarEstado(pedido, e.idestado)">
+                    {{ e.estado }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </td>
+
+          <td>
+            <ul class="detalle-lista">
+              <li *ngFor="let detalle of pedido.detallePedido">
+                <strong>Cantidad:</strong> {{ detalle.cantidad }},
+                <strong>Precio:</strong> {{ detalle.precioUnitario | currency }},
+                <strong>Platillo:</strong> {{ detalle.platilloIdplatillo | platillo: platillos }}
+              </li>
+            </ul>
+          </td>
+          <td>
+            <!-- Botón de eliminación en la celda de Acciones -->
+            <button mat-fab aria-label="Eliminar pedido" (click)="eliminarPedido(pedido.idpedido)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

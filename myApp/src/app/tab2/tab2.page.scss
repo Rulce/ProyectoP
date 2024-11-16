@@ -1,0 +1,22 @@
+.perfil-lista {
+    --ion-item-background: #ffffff;
+    --ion-item-border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  ion-item {
+    margin-bottom: 10px;
+    --background: #f9f9f9;
+  }
+  
+  ion-input[disabled] {
+    opacity: 0.6;
+  }
+  
+  ion-button {
+    width: 90%;
+    margin: 5px auto;
+  }
+  
